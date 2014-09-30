@@ -3,13 +3,12 @@ import java.util.ArrayList;
 
 public class Neuron extends Organelle { // Activated by impulses and physical contact
     
-    private Color defaultColor = new Color(255, 140, 0),
-            activeColor = Color.YELLOW;
-    
     ArrayList<Organelle> impulseSenders = new ArrayList<Organelle>();
     
     public Neuron(double x, double y, int activationImpulses) {
         super(x, y, activationImpulses);
+        defaultColor = new Color(255, 140, 0);
+        activeColor = Color.YELLOW;
         setColor(defaultColor);
     }
     

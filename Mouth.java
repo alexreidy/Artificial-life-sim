@@ -9,7 +9,10 @@ public class Mouth extends Organelle {
         setDefaultChangeInEnergy(0);
         setChangeInEnergyOnActivation(10);
         
-        setColor(new Color(255, 100, 100));
+        defaultColor = new Color(255, 100, 100);
+        activeColor = Color.RED;
+        
+        setColor(defaultColor);
     }
     
     public Mouth clone() {
@@ -21,7 +24,7 @@ public class Mouth extends Organelle {
     public void activate() {
         super.activate();
         objectsInContact.clear();
-        setColor(Color.RED);
+        setColor(activeColor);
     }
     
     @Override
@@ -50,7 +53,7 @@ public class Mouth extends Organelle {
             }
         }
         
-        setColor(Color.PINK);
+        setColor(defaultColor);
     }
     
     

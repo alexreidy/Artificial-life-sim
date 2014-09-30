@@ -2,16 +2,16 @@ import java.awt.geom.Rectangle2D;
 import java.awt.Color;
 
 public class Fin extends Organelle {
-    
-    private Color defaultColor = new Color(0, 0, 255), activeColor = new Color(0, 200, 255);
-    
+        
     public Fin(double x, double y, int activationImpulses,
             Vector2 defaultChangeInPosition, Vector2 changeInPositionOnActivation) {
         super(x, y, activationImpulses);
         setDefaultChangeInPosition(defaultChangeInPosition);
         setChangeInPositionOnActivation(changeInPositionOnActivation);
         setDefaultChangeInEnergy(-0.1);
-        setColor(Color.BLUE);
+        defaultColor = new Color(0, 0, 255);
+        activeColor = new Color(0, 200, 255);
+        setColor(defaultColor);
     }
     
     public Fin clone() {

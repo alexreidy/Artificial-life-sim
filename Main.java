@@ -1,12 +1,5 @@
 import java.util.ArrayList;
 
-// TODO
-// - Prevent organelle overlap in organism
-// - ******Allow for mutations to *remove* organelles too. May be tricky. (DONE.. I think)
-// - Make highly configurable from a text file
-// - Make better use of inheritance... default & active colors, for example.
-// - Allow change in organelle parameters during mutation. ******
-
 public class Main {
     
     public static int WIDTH = 900, HEIGHT = 750;
@@ -90,7 +83,6 @@ public class Main {
                 organisms.add(child);
                 addOrganismToCanvas(child);
             }
-            
             children.clear();
             
             canvas.render();

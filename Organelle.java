@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
@@ -22,6 +23,8 @@ public abstract class Organelle extends DrawableEntity {
     
     // List of foreign objects organelle is overlapping
     public ArrayList<Object> objectsInContact = new ArrayList<Object>();
+    
+    public Color defaultColor = Color.BLACK, activeColor = defaultColor;
     
     public Organelle(double x, double y, int activationImpulses) {
         super(x, y);

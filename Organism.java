@@ -20,13 +20,17 @@ public class Organism {
     public Organism parent;
     
     public boolean adjacent(Organelle a, Organelle b) {
-        if (b.getPosition().x == a.getPosition().x + Organelle.WIDTH && b.getPosition().y == a.getPosition().y)
+        if (b.getPosition().x == a.getPosition().x + Organelle.WIDTH &&
+                b.getPosition().y == a.getPosition().y)
             return true;
-        if (b.getPosition().x == a.getPosition().x - Organelle.WIDTH && b.getPosition().y == a.getPosition().y)
+        if (b.getPosition().x == a.getPosition().x - Organelle.WIDTH &&
+                b.getPosition().y == a.getPosition().y)
             return true;
-        if (b.getPosition().y == a.getPosition().y - Organelle.HEIGHT && b.getPosition().x == a.getPosition().x)
+        if (b.getPosition().y == a.getPosition().y - Organelle.HEIGHT &&
+                b.getPosition().x == a.getPosition().x)
             return true;
-        if (b.getPosition().y == a.getPosition().y + Organelle.HEIGHT && b.getPosition().x == a.getPosition().x)
+        if (b.getPosition().y == a.getPosition().y + Organelle.HEIGHT &&
+                b.getPosition().x == a.getPosition().x)
             return true;
         return false;
     }
@@ -44,13 +48,17 @@ public class Organism {
         };
         
         for (Organelle neighbor : organelle.contacts) {
-            if (positions[0] != null && neighbor.getPosition().x == positions[0].x && neighbor.getPosition().y == positions[0].y)
+            if (positions[0] != null && neighbor.getPosition().x == positions[0].x &&
+                    neighbor.getPosition().y == positions[0].y)
                 positions[0] = null;
-            if (positions[1] != null && neighbor.getPosition().x == positions[1].x && neighbor.getPosition().y == positions[1].y)
+            if (positions[1] != null && neighbor.getPosition().x == positions[1].x &&
+                    neighbor.getPosition().y == positions[1].y)
                 positions[1] = null;
-            if (positions[2] != null && neighbor.getPosition().y == positions[2].y && neighbor.getPosition().x == positions[2].x)
+            if (positions[2] != null && neighbor.getPosition().y == positions[2].y &&
+                    neighbor.getPosition().x == positions[2].x)
                 positions[2] = null;
-            if (positions[3] != null && neighbor.getPosition().y == positions[3].y && neighbor.getPosition().x == positions[3].x)
+            if (positions[3] != null && neighbor.getPosition().y == positions[3].y &&
+                    neighbor.getPosition().x == positions[3].x)
                 positions[3] = null;
         }
         
