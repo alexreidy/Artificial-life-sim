@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.geom.RectangularShape;
 import java.awt.*;
 
-public abstract class DrawableEntity {
+public abstract class DrawableEntity implements Drawable {
     
     private double x, y;
     private double direction; // degrees

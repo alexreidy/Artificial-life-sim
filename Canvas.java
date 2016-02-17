@@ -1,53 +1,60 @@
-import java.awt.*; import javax.swing.*;
-import java.awt.geom.RectangularShape;
-import java.util.ArrayList;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class Canvas {
+import java.util.Map;
+import java.util.LinkedHashMap;
+
+public class Canvas extends JPanel {
+
+    private Map<Object, Drawable> drawables = new LinkedHashMap<Object, Drawable>();
     
-    private int width, height;
-    private JFrame frame;
-    private Painter painter;
+    private JFrame window;
     
-    private ArrayList<DrawableEntity> entities = new ArrayList<DrawableEntity>();
+    public Canvas(int width, int height) {
+        super();
+        setSize(width, height);
+    }
     
-    private class Painter extends Component {
-        @Override
-        public void paint(Graphics g) {
-            Graphics2D g2D = (Graphics2D) g;
-            for (int i = 0; i < entities.size(); i++) {
-                DrawableEntity entity = entities.get(i);
-                g2D.setColor(entity.getColor());
-                g2D.fill(entity.getShape());
+    public JFrame displayInWindow(String title) {
+        if (window != null) return window;
+        
+        window = new JFrame(title);
+        window.setSize(getWidth(), getHeight());
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        window.add(this);
+        window.setVisible(true);
+        
+        return window;
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
+        synchronized(this) {
+            for (Drawable drawable : drawables.values()) {
+                g2.setColor(drawable.getColor());
+                g2.fill(drawable.getShape());
             }
         }
-        
     }
     
-    public Canvas(String title, int width, int height) {
-        frame = new JFrame(title);
-        frame.setSize(this.width = width, this.height = height);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.add(painter = new Painter());
-        frame.setVisible(true);
+    public synchronized void add(Drawable drawable) {
+        drawables.put(drawable, drawable);
     }
     
-    public void addEntity(DrawableEntity entity) {
-        entities.add(entity);
+    public synchronized void remove(Drawable drawable) {
+        drawables.remove(drawable);
     }
     
-    public void removeEntity(DrawableEntity entity) {
-        entities.remove(entity);
-    }
+    public void render() { repaint(); }
     
-    public void render() { painter.repaint(); }
-    
-    public int getHeight() { return height; }
-    public int getWidth() { return width; }
-    
-    public boolean isOnScreen(Vector2 position) {
-        return position.x > 0 && position.x < width
-            && position.y > 0 && position.y < height;
+    public boolean contains(Vector2 point) {
+        return point.x > 0 && point.x < getWidth() &&
+            point.y > 0 && point.y < getHeight();
     }
     
 }

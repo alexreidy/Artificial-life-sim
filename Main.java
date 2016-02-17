@@ -1,12 +1,14 @@
+import java.util.List;
 import java.util.ArrayList;
+import java.awt.Color;
 
 public class Main {
     
     public static int WIDTH = 900, HEIGHT = 750;
 
-    Canvas canvas = new Canvas("Simulation to Encourage the Evolution of Complex Artificial Life", WIDTH, HEIGHT);
+    Canvas canvas = new Canvas(WIDTH, HEIGHT);
     
-    ArrayList<Organism> organisms = new ArrayList<Organism>();
+    List<Organism> organisms = new ArrayList<Organism>();
     
     public static void main(String[] args) {
         new Main().begin();
@@ -14,13 +16,13 @@ public class Main {
     
     public void addOrganismToCanvas(Organism organism) {
         for (Organelle organelle : organism.organelles) {
-            canvas.addEntity(organelle);
+            canvas.add(organelle);
         }
     }
     
     public void removeOrganismFromCanvas(Organism organism) {
         for (Organelle organelle : organism.organelles) {
-            canvas.removeEntity(organelle);
+            canvas.remove(organelle);
         }
     }
     
@@ -33,19 +35,21 @@ public class Main {
     }
     
     private void begin() {
+        canvas.displayInWindow("Artificial Life Simulation by Alex Reidy");
+
         createOrganisms(100, 50);
         
         while (true) {
-            ArrayList<Organism> children = new ArrayList<Organism>(),
+            List<Organism> children = new ArrayList<Organism>(),
                     deadList = new ArrayList<Organism>();
             
-            if (Util.rin(1) > 0.95) createOrganisms(3, (int) Util.rin(5));
+            if (Util.rin(1) > 0.95) createOrganisms(3, (int) Util.rin(50));
             
             for (Organism o : organisms) {
                 o.update();
                 
                 for (Organelle organelle : o.organelles) {
-                    if (!canvas.isOnScreen(organelle.getPosition())) {
+                    if (!canvas.contains(organelle.getPosition())) {
                         organelle.setIsTouching(new Object());
                     }
                 }
@@ -60,7 +64,7 @@ public class Main {
                     o.checkForContactWith(oo);
                 }
                 
-                if (o.organelles.size() > 0 && !canvas.isOnScreen(o.organelles.get(0).getPosition())) {
+                if (o.organelles.size() > 0 && !canvas.contains(o.organelles.get(0).getPosition())) {
                     o.setPosition(Util.rin(WIDTH), Util.rin(HEIGHT));
                 }
                 
